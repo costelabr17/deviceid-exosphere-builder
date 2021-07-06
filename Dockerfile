@@ -1,5 +1,5 @@
 ARG DEBIAN_FRONTEND=noninteractive
-ARG DEVKITPRO_URL=https://github.com/devkitPro/pacman/releases/download/v1.0.2/
+ARG DEVKITPRO_URL=https://hub.docker.com/u/devkitpro
 ARG DEVKITPRO_FILE=devkitpro-pacman.amd64.deb
 ARG ATMOSPHERE_TAG=0.14.4
 
