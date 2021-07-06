@@ -1,5 +1,5 @@
 ARG DEBIAN_FRONTEND=noninteractive
-ARG DEVKITPRO_URL=https://github.com/devkitPro/wut/blob/master/.github/workflows/ci.yml
+ARG DEVKITPRO_URL=docker pull devkitpro/devkita64_devkitarm:latest
 ARG DEVKITPRO_FILE=devkitpro-pacman.amd64.deb
 ARG ATMOSPHERE_TAG=0.14.4
 
