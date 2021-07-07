@@ -9,18 +9,20 @@ ADD cleanup-repo.sh .
 RUN chmod +x cleanup-repo.sh && \
     ./cleanup-repo.sh
 
+WORKDIR /
+
 # Get and prebuild parts of Atmosphere
-RUN git clone https://github.com/Atmosphere-NX/Atmosphere && \
-    apt-get update && \
-    apt-get install git -y && \
-    apt-get upgrade -y 
+RUN git clone https://github.com/Atmosphere-NX/Atmosphere
+
 WORKDIR /Atmosphere
+
 RUN git remote update && \
     git fetch && \
     git checkout $ATMOSPHERE_TAG && \
-    git switch deviceid-exosphere
+    git switch -c deviceid-exosphere
 
 WORKDIR /Atmosphere/exosphere
+
 RUN make -j$(nproc) exosphere.bin && \
     git config --global user.email "fake@name.com" && git config --global user.name Fake Name && git config --global color.ui false
 
