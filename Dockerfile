@@ -1,20 +1,19 @@
-ARG DEBIAN_FRONTEND=noninteractive
-ARG ATMOSPHERE_TAG=0.19.5
-
 FROM costelabr/runner:latest
 
-ARG DEBIAN_FRONTEND
-ARG ATMOSPHERE_TAG
+ARG DEBIAN_FRONTEND=noninteractive
+ARG ATMOSPHERE_TAG=0.19.5
 
 # Get and prebuild parts of Atmosphere
 RUN git clone https://github.com/Atmosphere-NX/Atmosphere
 WORKDIR /Atmosphere
-RUN git checkout $ATMOSPHERE_TAG
-RUN git switch -c deviceid-exosphere
-WORKDIR /Atmosphere/exosphere
-RUN make -j$(nproc) exosphere.bin
+RUN cd /Atmosphere && \
+    git checkout $ATMOSPHERE_TAG && \
+    git switch -c deviceid-exosphere
 
-RUN git config --global user.email "fake@name.com" && git config --global user.name Fake Name && git config --global color.ui false
+WORKDIR /Atmosphere/exosphere
+RUN cd /Atmosphere/exosphere && \
+    make -j$(nproc) exosphere.bin && \
+    git config --global user.email "fake@name.com" && git config --global user.name Fake Name && git config --global color.ui false
 
 ADD build-deviceid-exosphere.sh .
 ADD deviceid.patch .
