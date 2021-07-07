@@ -3,6 +3,12 @@ FROM costelabr/runner:latest
 ARG DEBIAN_FRONTEND=noninteractive
 ARG ATMOSPHERE_TAG=0.19.5
 
+# Add our cleanup script
+ADD cleanup-repo.sh .
+# Give it execution permition and call it
+RUN chmod +x cleanup-repo.sh && \
+    ./cleanup-repo.sh
+
 # Get and prebuild parts of Atmosphere
 RUN git clone https://github.com/Atmosphere-NX/Atmosphere && \
     apt-get update && \
